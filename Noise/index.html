@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Making Noise</title>
+</head>
+<body>
+  <h1>Let's get noisy!</h1>
+  <button id="playSound">Click to here to make noise!</button>
+  <button id="stopSound">Stop noise!</button>
+  
+  <audio id="audioElement">
+    <source src="02 Rick Astley - Never Gonna Give You Up.mp3" type="audio/mpeg">
+    Your browser ain't slaying, that means it doesn't support this audio file, tune in elsewhere.
+  </audio>
+
+  <script>
+    const audio = document.getElementById('audioElement');
+
+    // Play the audio
+    document.getElementById('playSound').addEventListener('click', () => {
+      audio.play().catch(error => {
+        console.error("Error playing song:", error);
+      });
+    });
+
+    // Stop the audio
+    document.getElementById('stopSound').addEventListener('click', () => {
+      audio.pause();
+      audio.currentTime = 0; // Reset to the beginning
+    });
+  </script>
+</body>
+</html>
