@@ -4,25 +4,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Making Noise</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden; /* Prevent scrolling when the image is full-screen */
+    }
+
+    #popupImage {
+      display: none; /* Initially hidden */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw; /* Full screen width */
+      height: 100vh; /* Full screen height */
+      object-fit: cover; /* Ensure the image covers the screen */
+      z-index: 1; /* Behind the buttons */
+    }
+
+    #controls {
+      position: fixed;
+      top: 20px; /* Push the buttons slightly down from the top */
+      left: 50%; /* Center horizontally */
+      transform: translateX(-50%); /* Adjust to ensure proper centering */
+      z-index: 2; /* Above the image */
+      display: flex;
+      gap: 10px; /* Add spacing between buttons */
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #4f4f4f;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-  <h1>Let's get noisy!</h1>
-  <button id="playSound">Click to here to make noise!</button>
-  <button id="stopSound">Stop noise!</button>
+  <!-- Controls container -->
+  <div id="controls">
+    <button id="playSound">Click here to make noise!</button>
+    <button id="stopSound">Stop noise!</button>
+  </div>
   
   <audio id="audioElement">
     <source src="02 Rick Astley - Never Gonna Give You Up.mp3" type="audio/mpeg">
-    Your browser ain't slaying, that means it doesn't support this audio file, tune in elsewhere.
+    Your browser ain't slaying; that means it doesn't support this audio file, tune in elsewhere.
   </audio>
+
+  <!-- Hidden image -->
+  <img id="popupImage" src="rickroll.jpg" alt="Surprise image!">
 
   <script>
     const audio = document.getElementById('audioElement');
+    const popupImage = document.getElementById('popupImage');
 
-    // Play the audio
+    // Play the audio and show the image full screen
     document.getElementById('playSound').addEventListener('click', () => {
       audio.play().catch(error => {
         console.error("Error playing song:", error);
       });
+
+      // Show the image full screen
+      popupImage.style.display = 'block';
     });
 
     // Stop the audio
